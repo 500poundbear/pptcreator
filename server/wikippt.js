@@ -16,11 +16,16 @@ if(Meteor.isServer){
 			var slides=Projects.find({'creator':this.userId},{$limit:10}).fetch();
 			return slides;
 		},'addtopic':function(newtopic,createid){
-			var add=Projects.update({'creator':this.userId,'_id':createid},{$push:{'details':newtopic}},{multi:false});
+			var topic={};
+			topic['topicname']=newtopic;
+			topic['processed']=false;
+			var add=Projects.update({'creator':this.userId,'_id':createid},{$push:{'details':topic}},{multi:false});
 			return "HELLO";
 		},'gettopics':function(createid){
 			var get=Projects.find({'creator':this.userId,'_id':createid},{$limit:1}).fetch();
 			return get[0].details;
+		},'himj':function(y){
+			return "YEA";
 		}
 	});
 
