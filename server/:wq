@@ -1,0 +1,29 @@
+var Projects = new Mongo.Collection("projects");
+if(Meteor.isServer){
+	
+
+
+
+	Meteor.methods({
+		'addnewproject':function(str){
+			str['timestamp']=new Date();
+			str['creator']=this.userId;
+			str['details']="";	
+			Projects.insert(str);
+			return true;
+		},'getuserslides':function(st,en){
+			var slides=Projects.find({'creator':this.userId},{$limit:10}).fetch();
+			var slidestidied=[];
+			slides.forEach(function(e){
+				var temp={};
+				temp['name']=e.name;
+				temp['details']=e.details;
+				temp['timestamp']=e.timestamp;
+				slides=temp;
+			});
+			return slides;
+		}
+	});
+
+
+}

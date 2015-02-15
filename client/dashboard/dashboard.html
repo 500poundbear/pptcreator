@@ -1,0 +1,12 @@
+<template name="dashboard">
+	<h1>Dashboard</h1>
+	<input type="text" id="createnewslidesname" value={{randomslidesname}}>
+	<input type="button" id="createnewslides" value="+"/>
+	<h3>Created slides</h3>	
+
+	{{#each createdslides}}
+		<div>
+			<a href="/create/{{_id}}">{{name}}</a>
+		</div>
+	{{/each}}
+</template>
