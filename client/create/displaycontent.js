@@ -1,4 +1,27 @@
 if(Meteor.isClient){
+	if(Session.get("summarisedcontent")===undefined){
+		Session.set("summarisedcontent",[]);
+	}
+
+	var checkIfSummarisedContentIsReady = function(){
+		var temp = Session.get("summarisedcontent");
+		var allready=true;
+		temp.forEach(function(e,i,a){
+			//ping e.id to check for readiness
+			var checkready = Meteor.call("checksummaryready",e.id,function(err,res){
+				if(err){
+					console.log(err);
+					return;
+				}
+				console.log("CALLED CHECKSUMMARY READY WITH "+e.id);	
+				console.log("res: "+res);
+				
+				//TODO
+				//if(!res)setTimeout(checkifSummarisedContentIsReady,500);
+			});
+		});
+	}
+
 	Template.displaycontent.helpers({
 		'para':function(){
 			return Session.get("pagecontent");
@@ -17,7 +40,6 @@ if(Meteor.isClient){
 		'click .contentidcheckbox':function(e,t){
 			if(e.target.checked){
 				console.log("SEND CONTENT id: "+e.target.id+" FOR SUMMARISATION");
-				
 				/*ID is in the format KEbZHvHtHZfc22vkB-<id>*/
 				
 				var splitrawid = (e.target.id).split('-');
@@ -29,6 +51,10 @@ if(Meteor.isClient){
 				Meteor.call("callsummaryofjobparagraph",jobid,paraid,config,function(err,res){
 					if(err!==undefined)console.log(err);
 					console.log(res);
+					var temp = Session.get("summarisedcontent");
+					temp.push({'id':res});
+					Session.set("summarisedcontent",temp);
+					checkIfSummarisedContentIsReady();
 				});
 			}
 		}	

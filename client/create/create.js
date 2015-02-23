@@ -17,7 +17,7 @@ if(Meteor.isClient){
 				if(res.length>0 ){	
 					res.forEach(function(e,i){
 						Meteor.call('getcontent',e.jobid,function(err,res){
-							console.log(res);
+							//console.log(res);
 							Session.set("pagecontent",res);
 						});
 					});
