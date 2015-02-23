@@ -2,17 +2,17 @@
 	<div style="width:50%;position:relative;float:left;">
 	<h2 style="text-align:center">Original Text</h2>
 	{{#each para}}
-		
 		{{#if ptype type}}
+			<form>
+				<input type="checkbox" class="contentidcheckbox" id="{{wrapid id}}">
+			</form>	
 			<p>{{data}}</p>
 		{{/if}}
 		{{#if h2type type}}
 			<h3>{{data}}</h3>
-			 <button type="button" class="btn btn-primary">+</button>
 		{{/if}}
 		{{#if h3type type}}
 			<h4>{{data}}</h4>
-			 <button type="button" class="btn btn-primary">+</button>
 		{{/if}}
 	{{/each}}
 	</div>

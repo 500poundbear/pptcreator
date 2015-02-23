@@ -2,6 +2,8 @@ if(Meteor.isClient){
 	var fetchtopics = function(){
 		Meteor.call('gettopics',Session.get('createid'),function(err,res){
 			Session.set("gettopics",res);
+			console.log("GETTOPICS");
+			console.log(res);
 			var ready=true;
 			res.forEach(function(e){
 				if(e.processed===false)ready=false;
