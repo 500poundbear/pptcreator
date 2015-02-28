@@ -1,15 +1,16 @@
 <template name="create">
-<h1>Create - {{createid}}</h1>
 
-	<h3>Step 1: Input topic</h3>
+			<h1>Create - {{createid}}</h1>
 
-	<input type="text" id="inputtopic"/>	
-	<input type="submit" id="submittopic"/>	
-	<ul>
-	{{#each chosentopics}}
-		{{> selectedtopic}}
-	{{/each}}
-	</ul>
-	<h3>Step 2: Select Content</h3>
-	{{> displaycontent}}
+			<h3>Step 1: Input topic</h3>
+
+				<input type="text" id="inputtopic"/>	
+			<input type="submit" id="submittopic"/>	
+			<ul>
+			{{#each chosentopics}}
+				{{> selectedtopic}}
+			{{/each}}
+			</ul>
+			<h3>Step 2: Select Content</h3>
+			{{> displaycontent}}
 </template>
